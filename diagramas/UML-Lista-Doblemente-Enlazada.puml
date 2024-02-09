@@ -1,0 +1,40 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class ListaDoblementeEnlazada {
+    -primero:ElementoLDE
+    -ultimo:ElementoLDE
+    +isVacia():boolean
+    +vaciar()
+    -add(el:ElementoLDE):int
+    +add(s:String)
+    +add(o:Object)
+    +insert(s:String,posicion:int)
+    +insert(o:Object,posicion:int)
+    +del(posicion:int):int
+    +getNumeroElementos():int
+    +getPosicion(el:ElementoLDE):int
+    +getPrimero():ElementoLDE
+    +getUltimo():ElementoLDE
+    +getSiguiente(el:ElementoLDE):ElementoLDE
+    +getAnterior(el:ElementoLDE):ElementoLDE
+    +getElemento(posicion:int):ElementoLDE
+}
+
+class ElementoLDE {
+    -anterior:ElementoLDE
+    -siguiente:ElementoLDE
+    -data:Object
+    -insertarmeEn(el:ElementoLDE)
+    -getSiguiente():ElementoLDE
+    -getAnterior():ElementoLDE
+    +getData():Object
+    +setData(o:Object):Object
+}
+
+ListaDoblementeEnlazada --> ElementoLDE:ultimo
+ListaDoblementeEnlazada --> ElementoLDE:primero
+ElementoLDE --> ElementoLDE:siguiente
+ElementoLDE --> ElementoLDE:anterior
+
+@enduml
