@@ -26,8 +26,7 @@ class ElementoLS {
 +setData(o Object):Object
 }
 
-ListaSimple --> ElementoLS:primero
-ElementoLS --> ElementoLS:siguiente
+ListaSimple --> ElementoLS:datos
 
 /' COMENTARIOS:
 note bottom on link
