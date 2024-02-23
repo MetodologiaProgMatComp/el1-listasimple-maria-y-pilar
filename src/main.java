@@ -5,7 +5,7 @@ import es.uah.matcomp.ed.lineales.lista.simple.*;
 
 public class main {
     public static void main(String[] s){
-        ListaSimple l = new ListaSimple();
+        ListaSimple l = new ListaSimple(5);
 
         l.add("Primer elemento");
         l.add("Segundo elemento");
