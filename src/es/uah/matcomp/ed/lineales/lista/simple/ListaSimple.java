@@ -26,13 +26,15 @@ public class ListaSimple {
         }
     }
     private int add(ElementoLS el){
-        for (int i=0;i<maximo-1;i++){
-            if (datos[i]==null){   //Hay una posición libre
-                datos[i]=el;
-                return i;
+        if (!isVacia()) {
+            for (int i=0;i<maximo-1;i++){
+                if (datos[i]==null){   //Hay una posición libre
+                    datos[i]=el;
+                    return i;
+                }
             }
         }
-        return -1; //indica que la lista está llena
+        return 0; //0 indica que la lista está llena
     }
     public void add(String s){
         ElementoLS el=new ElementoLS(); //Creo nuevo elemento
@@ -63,7 +65,7 @@ public class ListaSimple {
             datos[posicion] = null;
             return 1;
         }
-        return -1;  //Indica error
+        return 0;  //Indica error
     }
     public int getNumeroElementos() {
         int cont = 0;
@@ -75,35 +77,20 @@ public class ListaSimple {
         return cont;
     }
     public int getPosicion(ElementoLS el) {
-        ElementoLS actual = getPrimero();
-        int posicion = 0;
-
-        while (actual != null) {
-            if (actual.getData().equals(el)) {
-                return posicion; // Se encontró el elemento
-            }
-            actual = getSiguiente(actual); // Siguiente
-            posicion++; // Aumenta la posición
-        }
-        return -1;  //Error
-    }
-    public ElementoLS getPrimero() {
-        for (int i=0;i<maximo-1;i--){
-            if (datos[i]!=null){
-                return datos[i];
+        for (int i = 0; i < maximo-1; i++) {
+            if (datos[i] == el) {
+                return i;
             }
         }
-        return null;//Lista vacia;
+        return 0; //Error
     }
-    public ElementoLS getUltimo() {
-        for (int i=maximo-1;i>0;i--){
-            if (datos[i]!=null){
-                return datos[i];
-            }
-        }
-        return null;//Lista vacia
+    public ElementoLS getPrimero() {  //DUDAAS
+        return datos[0];
     }
-
+    public ElementoLS getUltimo() {  //DUDAAS
+        int fin= datos.length-1;
+        return datos[fin];
+    }
     private ElementoLS getSiguiente(ElementoLS el) {
         int posicion = getPosicion(el);
         if ((posicion >= 0) && (posicion < maximo-1)) {

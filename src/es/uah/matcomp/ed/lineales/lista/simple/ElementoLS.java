@@ -8,7 +8,4 @@ public class ElementoLS {
     public void setData(Object data){
         this.data=data;
     }
-    public String toString(){
-        return String.valueOf(data);
-    }
 }
