@@ -5,22 +5,24 @@ public class ElementoLDE {
     private ElementoLDE siguiente;
     private Object data;
 
-    private void insertarmeEn(ElementoLDE el){
-        if (el!=null){
-            this.anterior=el;
-            //this.siguiente= getSiguiente(el);
-
-            //if (getSiguiente(el)!= null){
-                anterior=this;
-            }
-
-
+    public ElementoLDE (Object data){
+        this.data=data;
     }
-    private void getSiguiente(ElementoLDE el){
 
+    protected void insertarmeEn(ElementoLDE el){
+        this.siguiente=el.siguiente;
+        this.anterior=el;
+
+        if (el.siguiente !=null){
+            el.siguiente.anterior=this;
+        }
+        el.siguiente=this;
     }
-    private void getAnterior(ElementoLDE el){
-
+    protected ElementoLDE getSiguiente(){
+        return this.siguiente;
+    }
+    protected ElementoLDE getAnterior(){
+        return this.anterior;
     }
     public Object getData(){
         return this.data;

@@ -3,7 +3,7 @@ package es.uah.matcomp.ed.lineales.lista.simple;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-//REVISAR TEST
+//REVISAR TEST, no pasa por getSiguiente
 class ListaSimpleTest {    //Cambiar la forma de añadir elementos
 
     @Test
