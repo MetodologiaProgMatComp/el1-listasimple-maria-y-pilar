@@ -84,7 +84,7 @@ public class ListadoblementeEnlazada {
                     contador ++;
                 }
                 if (actual!= null) {
-                    actual.insertarmeEn(el);
+                    el.insertarmeEn(actual);
                     if (actual== ultimo) {
                         ultimo = el;
                     }
