@@ -10,13 +10,13 @@ public class ElementoLDE {
     }
 
     protected void insertarmeEn(ElementoLDE el){
-        this.siguiente=el.siguiente;
-        this.anterior=el;
+        el.siguiente=this.siguiente;
+        el.anterior=this;
 
-        if (el.siguiente !=null){
-            el.siguiente.anterior=this;
+        if (this.siguiente !=null){
+            this.siguiente.anterior=el;
         }
-        el.siguiente=this;
+        this.siguiente=el;
     }
     protected ElementoLDE getSiguiente(){
         return this.siguiente;
@@ -31,5 +31,8 @@ public class ElementoLDE {
         Object temporal = data;
         data=o;
         return temporal;
+    }
+    public String toString(){
+        return String.valueOf(data);
     }
 }

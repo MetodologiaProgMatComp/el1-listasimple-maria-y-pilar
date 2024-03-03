@@ -19,7 +19,7 @@ public class ListadoblementeEnlazada {
                 primero = el;    //Coloco primer elemento
                 ultimo = el;
             } else {
-                ultimo.insertarmeEn(el);
+                el.insertarmeEn(ultimo);
                 ultimo = el;
             }
             return 1; //añadido correctamente
@@ -39,7 +39,6 @@ public class ListadoblementeEnlazada {
 
     public void insert(String s, int posicion) {
         ElementoLDE el = new ElementoLDE(s);
-        add(el);
 
         if (posicion >= 0) {
             if (posicion == 0 || isVacia()) { //Se inserta el primero o esta vacio
@@ -55,18 +54,21 @@ public class ListadoblementeEnlazada {
                     contador ++;
                 }
                 if (actual!= null) {
-                    actual.insertarmeEn(el);
-                    if (actual== ultimo) {
+                    el.insertarmeEn(actual);
+                    if (actual == ultimo) {
                         ultimo = el;
                     }
-
                 }
+                else {
+                    ultimo.insertarmeEn(el); // Insertar al final de la lista
+                    ultimo = el;
+                }
+
             }
         }
     }
     public void insert(Object o, int posicion) {
         ElementoLDE el = new ElementoLDE(o);
-        add(el);
 
         if (posicion >= 0) {
             if (posicion == 0 || isVacia()) { //Se inserta el primero o esta vacio
