@@ -28,6 +28,9 @@ class ListadoblementeEnlazadaTest {
         ElementoLDE actual = l1.getElemento(0);
         assertEquals(10,actual.getData(),"Fallo add no coincide");
 
+        l1.add(null);
+        assertNull(l1.getUltimo().getData(),"Fallo add no coincide");
+
     }
 
     @Test
@@ -45,8 +48,8 @@ class ListadoblementeEnlazadaTest {
         l1.add(11);
         l1.add(13);
         l1.insert(12,2);
-        ElementoLDE actual = l1.getElemento(2);
-        assertEquals(12,actual.getData(),"Fallo add no coincide");
+        ElementoLDE actual = l1.getElemento(3);
+        assertEquals(12,actual.getData(),"Fallo insert no coincide");
     }
 
     @Test
@@ -56,8 +59,8 @@ class ListadoblementeEnlazadaTest {
         l1.add(11);
         l1.add(13);
         l1.insert("12",2);
-        ElementoLDE actual = l1.getElemento(2);
-        assertEquals("12",actual.getData(),"Fallo add no coincide");
+        ElementoLDE actual = l1.getElemento(3);
+        assertEquals("12",actual.getData(),"Fallo insert no coincide");
     }
 
     @Test
@@ -66,7 +69,7 @@ class ListadoblementeEnlazadaTest {
         l1.add(10);
         l1.add(11);
         l1.add(13);
-        l1.del(2);
+        l1.del(0);
         assertEquals(2,l1.getNumeroElementos(),"Fallo del no coincide");
     }
 
@@ -116,6 +119,18 @@ class ListadoblementeEnlazadaTest {
         l1.add(el2);
         l1.add(el3);
         assertEquals(el2,l1.getAnterior(el3),"Fallo anterior no coincide");
+    }
+
+    @Test
+    void getsiguiente() {
+        ListadoblementeEnlazada l1 = new ListadoblementeEnlazada();
+        ElementoLDE el1 = new ElementoLDE(10);
+        ElementoLDE el2 = new ElementoLDE(11);
+        ElementoLDE el3 = new ElementoLDE(13);
+        l1.add(el1);
+        l1.add(el2);
+        l1.add(el3);
+        assertEquals(el2,l1.getSiguiente(el1),"Fallo siguiente no coincide");
     }
 
     @Test

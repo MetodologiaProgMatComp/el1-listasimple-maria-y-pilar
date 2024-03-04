@@ -14,27 +14,30 @@ public class ListadoblementeEnlazada {
     }
 
     private int add(ElementoLDE el) {
-        if (el != null) {
-            if (isVacia()) {
-                primero = el;    //Coloco primer elemento
-                ultimo = el;
-            } else {
-                el.insertarmeEn(ultimo);
-                ultimo = el;
-            }
-            return 1; //añadido correctamente
+        if (primero== null) {
+            primero = el;
         }
-        return -1; //Error
+        else {
+            ultimo.insertarmeEn(el);
+        }
+        ultimo=el;
+        ElementoLDE posicion= primero;
+        int contador=0;
+        while(posicion.getSiguiente()!=null){
+            contador++;
+            posicion=posicion.getSiguiente();
+        }
+        return contador;
     }
 
     public void add(String s) {
         ElementoLDE el = new ElementoLDE(s);
-        add(el);
+        this.add(el);
     }
 
     public void add(Object o) {
         ElementoLDE el = new ElementoLDE(o);
-        add(el);
+        this.add(el);
     }
 
     public void insert(String s, int posicion) {
@@ -49,15 +52,12 @@ public class ListadoblementeEnlazada {
             } else {
                 ElementoLDE actual= primero;
                 int contador=0;
-                while(actual!=null && contador<posicion-1){  //Encontrar la poscion en la que insertar
+                while(actual!=null && contador<posicion){  //Encontrar la poscion en la que insertar
                     actual=actual.getSiguiente();
                     contador ++;
                 }
                 if (actual!= null) {
-                    el.insertarmeEn(actual);
-                    if (actual == ultimo) {
-                        ultimo = el;
-                    }
+                    actual.insertarmeEn(el);
                 }
                 else {
                     ultimo.insertarmeEn(el); // Insertar al final de la lista
@@ -79,17 +79,18 @@ public class ListadoblementeEnlazada {
             } else {
                 ElementoLDE actual= primero;
                 int contador=0;
-                while(actual!=null && contador<posicion-1){  //Encontrar la poscion en la que insertar
+                while(actual!=null && contador<posicion){  //Encontrar la poscion en la que insertar
                     actual=actual.getSiguiente();
                     contador ++;
                 }
                 if (actual!= null) {
-                    el.insertarmeEn(actual);
-                    if (actual== ultimo) {
-                        ultimo = el;
-                    }
-
+                    actual.insertarmeEn(el);
                 }
+                else {
+                    ultimo.insertarmeEn(el); // Insertar al final de la lista
+                    ultimo = el;
+                }
+
             }
         }
     }
@@ -106,7 +107,7 @@ public class ListadoblementeEnlazada {
             else {
                 ElementoLDE actual = primero;
                 int contador = 0;
-                while (actual != null && contador < posicion - 1) {
+                while (actual != null && contador < posicion) {
                     actual = actual.getSiguiente();
                     contador++;
                 }
@@ -136,7 +137,7 @@ public class ListadoblementeEnlazada {
         ElementoLDE actual=primero;
 
         while (actual !=null){
-            if(actual==el){
+            if(actual.getData()==el){
                 return posicion;
             }
             actual=actual.getSiguiente();
@@ -153,15 +154,22 @@ public class ListadoblementeEnlazada {
     }
 
     public ElementoLDE getAnterior(ElementoLDE el){
-        if (el!=null){
+        if (el != null) {
             return el.getAnterior();
+        }
+        return null;
+    }
+
+    public ElementoLDE getSiguiente(ElementoLDE el){
+        if (el != null) {
+            return el.getSiguiente();
         }
         return null;
     }
     public ElementoLDE getElemento(int posicion){
         ElementoLDE actual = primero;
         int contador = 0;
-        while (actual != null && contador < posicion - 1) {
+        while (actual != null && contador < posicion) {
             actual = actual.getSiguiente();
             contador++;
         }
