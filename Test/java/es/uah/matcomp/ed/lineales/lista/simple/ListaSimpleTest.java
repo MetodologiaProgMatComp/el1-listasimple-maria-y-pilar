@@ -181,7 +181,11 @@ class ListaSimpleTest {    //Cambiar la forma de añadir elementos
         el3.setData("20");
         l1.add(el3);
 
+        ElementoLS el4 = new ElementoLS();
+        el4.setData("25");
+
         assertEquals(0,l1.getPosicion(el1),"Fallo posicion no coincide");
+        assertEquals(-1,l1.getPosicion(el4),"Fallo posicion no coincide");
 
     }
 
@@ -232,7 +236,7 @@ class ListaSimpleTest {    //Cambiar la forma de añadir elementos
     }
 
     @Test
-    void getSiguiente(){   //Metodoprivado
+    void getSiguiente() {
         ListaSimple l1 = new ListaSimple(5);
         ElementoLS el1 = new ElementoLS();
         el1.setData("10");
@@ -246,10 +250,15 @@ class ListaSimpleTest {    //Cambiar la forma de añadir elementos
         el3.setData("20");
         l1.add(el3);
 
-        int anterior= l1.getPosicion(el1);
-        ElementoLS actual= l1.getElemento(anterior+1);
+        ElementoLS el4 = new ElementoLS();
+        el4.setData(null);
+        l1.add(el4);
 
-        assertEquals(el2,actual.getData(),"Fallo elemento no coincide en siguiente");
+        int anterior = l1.getPosicion(el1);
+        ElementoLS actual = l1.getElemento(anterior + 1);
+
+        assertEquals(el2, actual.getData(), "Fallo elemento no coincide en siguiente");
+        assertNull( l1.getSiguiente(el4), "Fallo elemento no coincide en siguiente");
     }
 
     @Test

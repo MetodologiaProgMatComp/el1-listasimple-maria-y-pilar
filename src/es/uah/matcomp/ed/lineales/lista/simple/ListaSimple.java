@@ -104,10 +104,18 @@ public class ListaSimple {
         return null;//Lista vacia
     }
 
-    private ElementoLS getSiguiente(ElementoLS el) {
-        int posicion = getPosicion(el);
-        if ((posicion >= 0) && (posicion < maximo-1)) {
-            return datos[posicion + 1];
+    protected ElementoLS getSiguiente(ElementoLS el) {
+        if (el != null) {
+            ElementoLS siguiente = null;
+            for (int i = 0; i < maximo; i++) {
+                if (datos[i] == el) {
+                    if (i + 1 < maximo) {
+                        siguiente = datos[i + 1];
+                    }
+                    break; //
+                }
+            }
+            return siguiente;
         }
         return null;
     }
