@@ -43,6 +43,7 @@ class ListadoblementeEnlazadaTest {
 
     @Test
     void insert() {
+        //Insertar en una posicion
         ListadoblementeEnlazada l1 = new ListadoblementeEnlazada();
         l1.add(10);
         l1.add(11);
@@ -50,6 +51,7 @@ class ListadoblementeEnlazadaTest {
         l1.insert(12,2);
         ElementoLDE actual = l1.getElemento(3);
         assertEquals(12,actual.getData(),"Fallo insert no coincide");
+
     }
 
     @Test
@@ -113,24 +115,30 @@ class ListadoblementeEnlazadaTest {
     void getAnterior() {
         ListadoblementeEnlazada l1 = new ListadoblementeEnlazada();
         ElementoLDE el1 = new ElementoLDE(10);
-        ElementoLDE el2 = new ElementoLDE(11);
-        ElementoLDE el3 = new ElementoLDE(13);
-        l1.add(el1);
-        l1.add(el2);
-        l1.add(el3);
-        assertEquals(el2,l1.getAnterior(el3),"Fallo anterior no coincide");
+        ElementoLDE el2 = new ElementoLDE(20);
+        ElementoLDE el3 = new ElementoLDE(30);
+
+        el1.insertarmeEn(el2);
+        el2.insertarmeEn(el3);
+
+        assertEquals(el1, l1.getAnterior(el2), "El anterior no coincide");
+        assertEquals(el2, l1.getAnterior(el3), "El anterior no coincide");
+        assertNull(l1.getAnterior(el1), "El anterior no coincide");
     }
 
     @Test
     void getsiguiente() {
         ListadoblementeEnlazada l1 = new ListadoblementeEnlazada();
         ElementoLDE el1 = new ElementoLDE(10);
-        ElementoLDE el2 = new ElementoLDE(11);
-        ElementoLDE el3 = new ElementoLDE(13);
-        l1.add(el1);
-        l1.add(el2);
-        l1.add(el3);
-        assertEquals(el2,l1.getSiguiente(el1),"Fallo siguiente no coincide");
+        ElementoLDE el2 = new ElementoLDE(20);
+        ElementoLDE el3 = new ElementoLDE(30);
+
+        el1.insertarmeEn(el2);
+        el2.insertarmeEn(el3);
+
+        assertEquals(el2, l1.getSiguiente(el1), "El siguiente de el1 debería ser el2");
+        assertEquals(el3, l1.getSiguiente(el2), "El siguiente de el2 debería ser el3");
+        assertNull(l1.getSiguiente(el3), "El siguiente de el3 debería ser nulo");
     }
 
     @Test

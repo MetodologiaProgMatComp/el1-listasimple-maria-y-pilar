@@ -29,10 +29,10 @@ public class ElementoLDE {
     }
     public Object setData(Object o){
         Object temporal = data;
-        data=o;
+        this.data=o;
         return temporal;
     }
     public String toString(){
-        return String.valueOf(data);
+        return String.valueOf(this.data);
     }
 }
