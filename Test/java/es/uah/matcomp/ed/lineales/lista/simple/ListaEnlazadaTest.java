@@ -8,96 +8,207 @@ import static org.junit.jupiter.api.Assertions.*;
 class ListaEnlazadaTest {
     private ListaEnlazada lista;
 
-    @BeforeEach
-    void setUp() {
-        lista = new ListaEnlazada();
+    @Test
+    void ListaEnlazada() {
+        ListaEnlazada l1 = new ListaEnlazada();
+        assertEquals(null, l1.getElemento(0));
+
+        ElementoLE el1 = new ElementoLE(12);
+        ListaEnlazada l2 = new ListaEnlazada(el1);
+
+        assertEquals(el1, l2.getElemento(0));
     }
 
     @Test
     void isVacia() {
-        assertTrue(lista.isVacia());
+        ListaEnlazada l1 = new ListaEnlazada();
+        assertTrue(l1.isVacia(), "Fallo: la lista debería estar vacía");
+        ElementoLE el1 = new ElementoLE(1);
+        l1.add(el1);
+        assertFalse(l1.isVacia(), "Fallo: la lista no debería estar vacía");
     }
 
     @Test
     void vaciar() {
-        lista.add("Elemento");
-        assertFalse(lista.isVacia());
-        lista.vaciar();
-        assertTrue(lista.isVacia());
+        ListaEnlazada l1 = new ListaEnlazada();
+        ElementoLE el1 = new ElementoLE(1);
+        l1.add(el1);
+        l1.vaciar();
+        assertTrue(l1.isVacia(), "Fallo: la lista debería estar vacía después de vaciarla");
     }
 
     @Test
     void add() {
-        lista.add("Elemento");
-        assertFalse(lista.isVacia());
-        assertEquals(1, lista.getNumeroElementos());
+        ListaEnlazada l1 = new ListaEnlazada();
+        assertNull(l1.getElemento(0), "Fallo: la lista debería estar vacía al principio");
+        ElementoLE el1 = new ElementoLE(1);
+        l1.add(el1);
+        assertEquals(1, l1.getElemento(0).getData(), "Fallo: el primer elemento no coincide");
+        ElementoLE el2 = new ElementoLE(3);
+        l1.add(el2);
+        assertEquals(3, l1.getElemento(1).getData(), "Fallo: el segundo elemento no coincide");
     }
 
     @Test
     void testAdd() {
-        lista.add(new ElementoLE("Elemento"));
-        assertFalse(lista.isVacia());
-        assertEquals(1, lista.getNumeroElementos());
+        ListaEnlazada l1 = new ListaEnlazada();
+        l1.add("1");
+        assertEquals("1", l1.getElemento(0).getData(), "Fallo: el primer elemento no coincide");
+        l1.add(2);
+        assertEquals(2, l1.getElemento(1).getData(), "Fallo: el segundo elemento no coincide");
     }
 
     @Test
     void insert() {
-        lista.insert("Elemento", 0);
-        assertFalse(lista.isVacia());
-        assertEquals(1, lista.getNumeroElementos());
+        ListaEnlazada l1 = new ListaEnlazada();
+        ElementoLE el1 = new ElementoLE("10");
+        l1.add(el1);
+
+        ElementoLE el2 = new ElementoLE("15");
+        l1.add(el2);
+
+        ElementoLE el3 = new ElementoLE("20");
+        l1.add(el3);
+
+        ElementoLE el4 = new ElementoLE("12");
+
+        l1.insert(el4, 1);
+        ElementoLE actual = l1.getElemento(1);
+        assertEquals(el4, actual, "Fallo: el elemento insertado no coincide");
     }
 
     @Test
     void testInsert() {
-        lista.add("Elemento1");
-        lista.add("Elemento2");
-        lista.insert("ElementoInsertado", 1);
-        assertEquals("ElementoInsertado", lista.getElemento(1).getData());
-        assertEquals(3, lista.getNumeroElementos());
+        ListaEnlazada l1 = new ListaEnlazada();
+        ElementoLE el1 = new ElementoLE("1");
+        l1.add(el1);
+
+        ElementoLE el2 = new ElementoLE("2");
+        l1.add(el2);
+
+        ElementoLE el3 = new ElementoLE("3");
+        l1.add(el3);
+
+        l1.insert("20", 1);
+        assertEquals("20", l1.getElemento(1).getData(), "Fallo: el elemento insertado no coincide");
     }
 
     @Test
     void del() {
-        lista.add("Elemento");
-        lista.del(0);
-        assertTrue(lista.isVacia());
+        ListaEnlazada l1 = new ListaEnlazada();
+        ElementoLE el1 = new ElementoLE("1");
+        l1.add(el1);
+
+        ElementoLE el2 = new ElementoLE("2");
+        l1.add(el2);
+
+        ElementoLE el3 = new ElementoLE("3");
+        l1.add(el3);
+
+        int actual1 = l1.del(1);
+        assertEquals(1, actual1, "Fallo: el método de eliminación no coincide");
+
+        ListaEnlazada l2 = new ListaEnlazada();
+        ElementoLE el5 = new ElementoLE("5");
+        l1.add(el5);
+
+        int actual2 = l2.del(-1);
+        assertEquals(-1, actual2, "Fallo: el método de eliminación no coincide");
     }
 
     @Test
     void getNumeroElementos() {
-        assertEquals(0, lista.getNumeroElementos());
-        lista.add("Elemento");
-        assertEquals(1, lista.getNumeroElementos());
+        ListaEnlazada l1 = new ListaEnlazada();
+        ElementoLE el1 = new ElementoLE("5");
+        l1.add(el1);
+
+        ElementoLE el2 = new ElementoLE("3");
+        l1.add(el2);
+
+        ElementoLE el3 = new ElementoLE("2");
+        l1.add(el3);
+
+        assertEquals(3, l1.getNumeroElementos(), "Fallo: el número de elementos no coincide");
     }
 
     @Test
     void getPosicion() {
-        lista.add("Elemento1");
-        lista.add("Elemento2");
-        assertEquals(0, lista.getPosicion(lista.getElemento(0)));
-        assertEquals(1, lista.getPosicion(lista.getElemento(1)));
+        ListaEnlazada l1 = new ListaEnlazada();
+        ElementoLE el1 = new ElementoLE("10");
+        l1.add(el1);
+
+        ElementoLE el2 = new ElementoLE("15");
+        l1.add(el2);
+
+        ElementoLE el3 = new ElementoLE("20");
+        l1.add(el3);
+
+        ElementoLE el4 = new ElementoLE("25");
+
+        assertEquals(0, l1.getPosicion(el1), "Fallo: la posición del primer elemento no coincide");
+        assertEquals(-1, l1.getPosicion(el4), "Fallo: la posición de un elemento inexistente no coincide");
     }
 
     @Test
     void getUltimo() {
-        lista.add("Elemento1");
-        lista.add("Elemento2");
-        assertEquals("Elemento2", lista.getUltimo().getData());
+        ListaEnlazada l1 = new ListaEnlazada();
+        ElementoLE el1 = new ElementoLE(10);
+        l1.add(el1);
+
+        ElementoLE el2 = new ElementoLE(15);
+        l1.add(el2);
+
+        ElementoLE el3 = new ElementoLE(20);
+        l1.add(el3);
+
+        ElementoLE actual = l1.getUltimo();
+
+        assertEquals(el3, actual, "Fallo: el último elemento no coincide");
     }
 
     @Test
     void getSiguiente() {
-        ElementoLE primero = new ElementoLE("Elemento1");
-        ElementoLE segundo = new ElementoLE("Elemento2");
-        primero.setSiguiente(segundo);
-        assertEquals(segundo, lista.getSiguiente(primero));
+        ListaEnlazada l1 = new ListaEnlazada();
+        ElementoLE el1 = new ElementoLE(10);
+        l1.add(el1);
+
+        ElementoLE el2 = new ElementoLE(15);
+        l1.add(el2);
+
+        ElementoLE el3 = new ElementoLE(20);
+        l1.add(el3);
+
+        ElementoLE el4 = new ElementoLE(null);
+        l1.add(el4);
+
+        ElementoLE actual = l1.getElemento(0);
+        assertEquals(el2, l1.getSiguiente(actual), "Fallo: el elemento siguiente no coincide");
+
+        assertNull(l1.getSiguiente(el4), "Fallo: no debería haber un elemento siguiente para un elemento con valor nulo");
     }
 
     @Test
     void getElemento() {
-        lista.add("Elemento1");
-        lista.add("Elemento2");
-        assertEquals("Elemento1", lista.getElemento(0).getData());
-        assertEquals("Elemento2", lista.getElemento(1).getData());
+        ListaEnlazada l1 = new ListaEnlazada();
+        ElementoLE el1 = new ElementoLE(10);
+        l1.add(el1);
+
+        ElementoLE el2 = new ElementoLE(15);
+        l1.add(el2);
+
+        ElementoLE el3 = new ElementoLE(20);
+        l1.add(el3);
+
+        ElementoLE actual = l1.getElemento(1);
+
+        assertEquals(el2, actual, "Fallo: el elemento obtenido no coincide");
+
+        ListaEnlazada l2 = new ListaEnlazada();
+        ElementoLE el5 = new ElementoLE(30);
+        l2.add(el5);
+
+        ElementoLE actual2 = l2.getElemento(-1);
+        assertNull(actual2, "Fallo: no debería haber un elemento para un índice negativo");
     }
 }
+

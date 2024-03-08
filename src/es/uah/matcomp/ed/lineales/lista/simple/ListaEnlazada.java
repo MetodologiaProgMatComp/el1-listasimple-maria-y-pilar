@@ -41,27 +41,26 @@ public class ListaEnlazada {
         add(nuevoElemento);
     }
 
-    public void insert(String s, int posicion) {
+    public void insert(ElementoLE elemento, int posicion) {
         if (posicion < 0) {
             System.out.println("Posición inválida");
             return;
         }
 
-        ElementoLE nuevoElemento = new ElementoLE(s);
-
         if (posicion == 0) {
-            nuevoElemento.setSiguiente(primero);
-            primero = nuevoElemento;
+            elemento.setSiguiente(primero);
+            primero = elemento;
         } else {
             ElementoLE anterior = getElemento(posicion - 1);
             if (anterior != null) {
-                nuevoElemento.setSiguiente(anterior.getSiguiente());
-                anterior.setSiguiente(nuevoElemento);
+                elemento.setSiguiente(anterior.getSiguiente());
+                anterior.setSiguiente(elemento);
             } else {
                 System.out.println("Posición inválida");
             }
         }
     }
+
 
     public void insert(Object o, int posicion) {
         if (posicion < 0) {
@@ -85,10 +84,10 @@ public class ListaEnlazada {
         }
     }
 
-    public void del(int posicion) {
+    public int del(int posicion) {
         if (posicion < 0 || primero == null) {
             System.out.println("Posición inválida o lista vacía");
-            return;
+            return posicion;
         }
         if (posicion == 0) {
             primero = primero.getSiguiente();
@@ -100,6 +99,7 @@ public class ListaEnlazada {
                 System.out.println("Posición inválida");
             }
         }
+        return posicion;
     }
 
     public int getNumeroElementos() {
