@@ -125,6 +125,9 @@ public class ListaEnlazada {
         }
         return -1;
     }
+    public ElementoLE getPrimero(){
+        return this.primero;
+    }
 
     public ElementoLE getUltimo() {
         ElementoLE actual = primero;

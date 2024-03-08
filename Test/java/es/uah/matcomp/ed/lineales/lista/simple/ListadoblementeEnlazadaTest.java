@@ -51,7 +51,9 @@ class ListadoblementeEnlazadaTest {
         l1.insert(12,2);
         ElementoLDE actual = l1.getElemento(3);
         assertEquals(12,actual.getData(),"Fallo insert no coincide");
-
+        l1.insert(12,4);
+        ElementoLDE actual1 = l1.getUltimo();
+        assertEquals(12,actual1.getData(),"Fallo insert no coincide");
     }
 
     @Test
@@ -63,6 +65,9 @@ class ListadoblementeEnlazadaTest {
         l1.insert("12",2);
         ElementoLDE actual = l1.getElemento(3);
         assertEquals("12",actual.getData(),"Fallo insert no coincide");
+        l1.insert("12",4);
+        ElementoLDE actual1 = l1.getUltimo();
+        assertEquals("12",actual1.getData(),"Fallo insert no coincide");
     }
 
     @Test
@@ -73,6 +78,21 @@ class ListadoblementeEnlazadaTest {
         l1.add(13);
         l1.del(0);
         assertEquals(2,l1.getNumeroElementos(),"Fallo del no coincide");
+
+        ListadoblementeEnlazada l2 = new ListadoblementeEnlazada();
+        l2.add(10);
+        l2.del(0);
+        assertEquals(0,l2.getNumeroElementos(),"Fallo del no coincide");
+
+        ListadoblementeEnlazada l3 = new ListadoblementeEnlazada();
+        l3.add(10);
+        l3.add(11);
+        l3.add(13);
+        l3.del(1);
+        assertEquals(1,l3.getNumeroElementos(),"Fallo del no coincide");
+        ListadoblementeEnlazada l4 = new ListadoblementeEnlazada();
+        l4.add(10);
+        assertEquals(-1,l4.del(-1),"Fallo del no coincide");
     }
 
     @Test
@@ -91,6 +111,8 @@ class ListadoblementeEnlazadaTest {
         l1.add(el1);
 
         assertEquals(0,l1.getPosicion(el1),"Fallo posicion no coincide");
+        ElementoLDE el2 = new ElementoLDE(11);
+        assertEquals(-1,l1.getPosicion(el2),"Fallo posicion no coincide");
     }
 
     @Test
@@ -124,6 +146,10 @@ class ListadoblementeEnlazadaTest {
         assertEquals(el1, l1.getAnterior(el2), "El anterior no coincide");
         assertEquals(el2, l1.getAnterior(el3), "El anterior no coincide");
         assertNull(l1.getAnterior(el1), "El anterior no coincide");
+
+        ListadoblementeEnlazada l2 = new ListadoblementeEnlazada();
+        ElementoLDE el4= new ElementoLDE(null);
+        assertEquals (null,l2.getAnterior(el4));
     }
 
     @Test

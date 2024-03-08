@@ -88,10 +88,8 @@ public class ListaSimple {
         return -1;  //Error
     }
     public ElementoLS getPrimero() {
-        for (int i=0;i<maximo-1;i--){
-            if (datos[i]!=null){
-                return datos[i];
-            }
+        if (datos[0]!=null){
+            return datos[0];
         }
         return null;//Lista vacia;
     }
